@@ -32,6 +32,8 @@
 				<canvas id="canvas" width="200" height="300"></canvas>
 				<font id="showdate" color="#FF0000"></font>
 				</div>
+				<div id="screenshot">
+				</div>
 				<button id="screen">Snap</button>
           </div>
           <button id="to_login_btn" class="green_btn">登入</button>
@@ -128,7 +130,7 @@
 		$("#screen").click(function() {
 		  html2canvas($("#camera")[0], {
 			onrendered: function(canvas) {
-			  var $div = $("#camera");
+			  var $div = $("#screenshot");
 			  $div.empty();
 			  $("<img/>", { src: canvas.toDataURL("image/png") }).appendTo($div);
 			}
