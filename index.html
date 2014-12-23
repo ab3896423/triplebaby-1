@@ -23,9 +23,9 @@
         <div class="menu_item_tab"></div>
       </div>
 
-      <div class="page" id="intro">
+      <div class="page" id="camera">
         <div class="content">
-          <div id="camera" class="form box">
+          <div class="form box">
                 <video id="video" width="100%" height="60%"></video>
 				<canvas id="canvas" width="100%" height="60%"></canvas>
 				<font id="showdate" color="#FF0000"></font>
@@ -125,7 +125,7 @@
 		$(":button").click(function() {
 		  html2canvas($("#camera")[0], {
 			onrendered: function(canvas) {
-			  var $div = $("#intro .content");
+			  var $div = $("#camera");
 			  $div.empty();
 			  $("<img/>", { src: canvas.toDataURL("image/png") }).appendTo($div);
 			}
