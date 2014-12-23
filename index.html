@@ -125,7 +125,7 @@
 		$(":button").click(function() {
 		  html2canvas($("#camera")[0], {
 			onrendered: function(canvas) {
-			  var $div = $("#camera");
+			  var $div = $("#intro .content");
 			  $div.empty();
 			  $("<img/>", { src: canvas.toDataURL("image/png") }).appendTo($div);
 			}
