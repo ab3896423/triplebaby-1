@@ -27,6 +27,7 @@
         <div class="content">
           <div class="form box">
                 <video id="video" width="50%" height="50%" autoplay=""></video>
+				<button id="snap">Snap Photo</button>
 				<canvas id="canvas" width="50%" height="50%"></canvas>
 				<font id="showdate" color="#FF0000"></font>
 				<input type="button" value="拍照" />
@@ -175,6 +176,11 @@
 				}, errBack);
 			}
 		}, false);
+		
+		document.getElementById("snap")
+			.addEventListener("click", function() {
+			context.drawImage(video, 0, 0, 640, 480);
+		});
 	</script>
   </body>
 </html>
