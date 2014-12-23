@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/reset.css"> 
     <link rel="stylesheet" href="css/style.css"> 
   </head>
-  <body>
+  <body onload="ShowTime()">
     <div class="wrapper">
 
       <div class="header">台南市違規停車檢舉平台</div>
@@ -25,12 +25,10 @@
 
       <div class="page" id="intro">
         <div class="content">
-          <div class="form box">
-            <img src="img/tp_logo.png" class="logo">
-            <p id="description">
-              馬路三寶是ptt的流行用語，尤其流行於八卦版。其意思是鄉民們認為馬路上最會造成危險的三種人：女人、老人、老女人。<br>
-              該用法由來應不是起源自ptt，但約在2010年之後在八卦版開始常常出現，甚至只要出現「三寶」直接大家就會直接想到是馬路三寶。<br>
-            </p>
+          <div id="camera" class="form box">
+                <video id="video" width="100%" height="100%" autoplay></video>
+		<canvas id="canvas" width="100%" height="100%"></canvas>
+		<font id="showdate" color="#FF0000"></font>
           </div>
           <button id="to_login_btn" class="green_btn">登入</button>
         </div>
@@ -85,10 +83,7 @@
       </div>
 
       <div class="page" id="report">
-        <div id="camera" class="content">
-        	<video id="video" width="100%" height="100%" autoplay></video>
-		<canvas id="canvas" width="100%" height="100%"></canvas>
-		<font id="showdate" color="#FF0000"></font>
+        <div class="content">
         </div>
       </div>
       <div class="page" id="all">
