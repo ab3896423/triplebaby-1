@@ -85,8 +85,10 @@
       </div>
 
       <div class="page" id="report">
-        <div class="content">
-          <h1>我要檢舉</h1>
+        <div id="camera" class="content">
+        	<video id="video" width="100%" height="100%" autoplay></video>
+		<canvas id="canvas" width="100%" height="100%"></canvas>
+		<font id="showdate" color="#FF0000"></font>
         </div>
       </div>
       <div class="page" id="all">
@@ -120,5 +122,63 @@
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/jquery.touchSwipe.min.js"></script>
     <script src="js/app.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js "></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js "></script>
+	<script src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
+	<script>
+		$(":button").click(function() {
+		  html2canvas($("#camera")[0], {
+			onrendered: function(canvas) {
+			  var $div = $("#camera");
+			  $div.empty();
+			  $("<img/>", { src: canvas.toDataURL("image/png") }).appendTo($div);
+			}
+		  });
+		});
+		
+		function ShowTime(){
+			var NowDate=new Date();
+			var h=NowDate.getHours();
+			var m=NowDate.getMinutes();
+			var s=NowDate.getSeconds();
+			var mm=NowDate.getMonth()+1;
+			var dd=NowDate.getDate();
+			var yy=NowDate.getYear();
+			if(yy<2000)yy=yy+1900;
+			document.getElementById('showdate').innerHTML = yy+'/'+mm+'/'+dd+' '+h+':'+m+':'+s;
+			setTimeout('ShowTime()',1000);
+		};
+		
+		// Put event listeners into place
+		window.addEventListener("DOMContentLoaded", function() {
+			// Grab elements, create settings, etc.
+			var canvas = document.getElementById("canvas"),
+			context = canvas.getContext("2d"),
+			video = document.getElementById("video"),
+			videoObj = { "video": true },
+			errBack = function(error) {
+				console.log("Video capture error: ", error.code); 
+			};
+
+			// Put video listeners into place
+			if(navigator.getUserMedia) { // Standard
+				navigator.getUserMedia(videoObj, function(stream) {
+					video.src = stream;
+					video.play();
+				}, errBack);
+			} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+				navigator.webkitGetUserMedia(videoObj, function(stream){
+					video.src = window.webkitURL.createObjectURL(stream);
+					video.play();
+				}, errBack);
+			}
+			else if(navigator.mozGetUserMedia) { // Firefox-prefixed
+				navigator.mozGetUserMedia(videoObj, function(stream){
+					video.src = window.URL.createObjectURL(stream);
+					video.play();
+				}, errBack);
+			}
+		}, false);
+	</script>
   </body>
 </html>
